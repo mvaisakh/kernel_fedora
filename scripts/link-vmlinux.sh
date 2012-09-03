@@ -31,8 +31,9 @@
 set -e
 
 LD="$1"
-KBUILD_LDFLAGS="$2"
-LDFLAGS_vmlinux="$3"
+LDFINAL="$2"
+KBUILD_LDFLAGS="$3"
+LDFLAGS_vmlinux="$4"
 
 is_enabled() {
 	grep -q "^$1=y" include/config/auto.conf
@@ -85,8 +86,11 @@ modpost_link()
 		--end-group"
 
 	if is_enabled CONFIG_LTO; then
-		gen_initcalls
-		lds="-T .tmp_initcalls.lds"
+		lds=""
+		if [ -n "${CONFIG_LTO_CLANG}" ] ; then
+			gen_initcalls
+			lds="-T .tmp_initcalls.lds"
+		fi
 
 		if is_enabled CONFIG_MODVERSIONS; then
 			gen_symversions
@@ -100,7 +104,7 @@ modpost_link()
 		info LD ${1}
 	fi
 
-	${LD} ${KBUILD_LDFLAGS} -r -o ${1} ${lds} ${objects}
+	${LDFINAL} ${KBUILD_LDFLAGS} -r -o ${1} ${lds} ${objects}
 }
 
 objtool_link()
