@@ -744,11 +744,12 @@ extern struct paravirt_patch_site __start_parainstructions[],
  * convention such that we can 'call' it from assembly.
  */
 
-extern void int3_magic(unsigned int *ptr); /* defined in asm */
+extern __visible void int3_magic(unsigned int *ptr); /* defined in asm */
 
 asm (
 "	.pushsection	.init.text, \"ax\", @progbits\n"
 "	.type		int3_magic, @function\n"
+"	.globl		int3_magic\n"
 "int3_magic:\n"
 	ANNOTATE_NOENDBR
 "	movl	$1, (%" _ASM_ARG1 ")\n"
@@ -757,7 +758,7 @@ asm (
 "	.popsection\n"
 );
 
-extern void int3_selftest_ip(void); /* defined in asm below */
+extern __visible void int3_selftest_ip(void); /* defined in asm below */
 
 static int __init
 int3_exception_notify(struct notifier_block *self, unsigned long val, void *data)
@@ -798,9 +799,21 @@ static noinline void __init int3_selftest(void)
 	 * INT3 padded with NOP to CALL_INSN_SIZE. The int3_exception_nb
 	 * notifier above will emulate CALL for us.
 	 */
+<<<<<<< HEAD
 	asm volatile ("int3_selftest_ip:\n\t"
 		      ANNOTATE_NOENDBR
 		      "    int3; nop; nop; nop; nop\n\t"
+=======
+	asm volatile ("1: int3; nop; nop; nop; nop\n\t"
+		      ".pushsection .init.data,\"aw\"\n\t"
+		      ".align " __ASM_SEL(4, 8) "\n\t"
+		      ".globl int3_selftest_ip\n\t"
+		      ".type int3_selftest_ip, @object\n\t"
+		      ".size int3_selftest_ip, " __ASM_SEL(4, 8) "\n\t"
+		      "int3_selftest_ip:\n\t"
+		      __ASM_SEL(.long, .quad) " 1b\n\t"
+		      ".popsection\n\t"
+>>>>>>> 98bbb1fd7666 (x86/alternative/lto: Export int3 assembler symbols for LTO)
 		      : ASM_CALL_CONSTRAINT
 		      : __ASM_SEL_RAW(a, D) (&val)
 		      : "memory");
