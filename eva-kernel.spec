@@ -115,18 +115,6 @@ This meta package is used to install matching core and devel packages for a give
 %prep
 %setup -q -n linux-%{_basekver}
 
-# Extract patch and apply to tree
-unxz -c %{PATCH0} > %{PATCH0}.unxz
-patch -p1 -i %{PATCH0}.unxz
-
-# Patch the config file
-cp CONFIGS/xanmod/gcc/config_x86-64 .config_upstream
-patch .config_upstream -i %{PATCH1} -o .config
-
-# Remove XanMod's localversion
-find . -name "localversion*" -delete
-scripts/config -u LOCALVERSION
-
 # Set kernel version string as build salt
 scripts/config --set-str BUILD_SALT "%{kverstr}"
 
