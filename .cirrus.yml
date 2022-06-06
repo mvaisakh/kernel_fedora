@@ -13,7 +13,7 @@ eva_task:
     - dnf install gcc zip unzip -y
   build_script:
     - mkdir -p $HOME/rpmbuild/SOURCES srpm_output/
-    - rpmbuild -v -bs eva-kernel.spec
+    - rpmbuild -v -bb eva-kernel.spec
     - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
   artifacts:
     path: srpm_output/*
