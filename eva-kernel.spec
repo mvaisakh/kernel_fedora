@@ -449,4 +449,5 @@ fi
 %defattr (-, root, root)
 
 %changelog
+* Mon 06 June 2022 Vaisakh Murali <vaisakhmurali@gmail.com> [1.0]
 - Initial eva-kernel specs
