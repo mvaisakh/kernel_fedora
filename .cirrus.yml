@@ -12,6 +12,7 @@ eva_task:
     - dnf group install rpm-development-tools -y
     - dnf install gcc -y
   build_script:
+    - mkdir -p $HOME/rpmbuild/SOURCES srpm_output/
     - rpmbuild -v -bs eva-kernel.spec
     - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
   artifacts:
