@@ -16,14 +16,14 @@
 
 %define flavor eva
 Name: kernel%{?flavor:-%{flavor}}
-Summary: The Linux Kernel with XanMod Patches
+Summary: The Linux Kernel with mvaisakh's modifications
 
 %define _basekver 5.18
 %define _stablekver 1
 Version: %{_basekver}.%{_stablekver}
 
 %define customver 1
-%define flaver eva-%{customver}
+%define flaver eva.%{customver}
 
 Release:%{flaver}.0%{?dist}
 
