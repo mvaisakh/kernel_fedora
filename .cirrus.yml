@@ -16,6 +16,6 @@ eva_task:
     - rpmbuild -v -bs eva-kernel.spec
     - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
   artifacts:
-    path: srpm_output/
+    path: srpm_output/*
     when: always
     expire_in: 1 week
