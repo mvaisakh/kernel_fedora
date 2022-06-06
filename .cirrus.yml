@@ -13,7 +13,7 @@ eva_task:
     - dnf install gcc zip unzip bc bison dwarves elfutils-devel flex git-core grubby hostname kmod libkcapi-hmaccalc m4 net-tools openssl openssl-devel perl-Carp perl-devel perl-generators perl-interpreter python3-devel rsync -y
   build_script:
     - mkdir -p $HOME/rpmbuild/SOURCES srpm_output/
-    - rpmbuild -v -bb eva-kernel.spec
+    - rpmbuild -v -bb --without install eva-kernel.spec
     - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
   artifacts:
     path: srpm_output/*
