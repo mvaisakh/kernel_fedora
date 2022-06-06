@@ -36,10 +36,9 @@ Group: System Environment/Kernel
 Vendor: The Linux Community
 URL: https://github.com/mvaisakh/kernel_fedora
 Source0: https://github.com/mvaisakh/kernel_fedora/archive/refs/heads/kernel.zip
-Patch0: https://github.com/xanmod/linux/releases/download/%{version}-xanmod%{customver}/patch-%{version}-xanmod%{customver}.xz
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
-BuildRequires: python3-devel make perl-generators perl-interpreter openssl-devel bison flex findutils git-core perl-devel openssl elfutils-devel gawk binutils m4 tar hostname bzip2 bash gzip xz bc diffutils redhat-rpm-config net-tools elfutils patch rpm-build dwarves kmod libkcapi-hmaccalc perl-Carp rsync grubby
+BuildRequires: python3-devel make perl-generators perl-interpreter openssl-devel bison flex findutils git-core perl-devel openssl elfutils-devel gawk binutils m4 tar hostname bzip2 bash gzip zip unzip bc diffutils redhat-rpm-config net-tools elfutils patch rpm-build dwarves kmod libkcapi-hmaccalc perl-Carp rsync grubby
 %if %{llvm_kbuild}
 BuildRequires: llvm%{_isa} lld%{_isa} clang%{_isa}
 %else
