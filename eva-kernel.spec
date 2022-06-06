@@ -14,7 +14,7 @@
 # whether to use LLVM-built kernel package dependencies
 %define llvm_kbuild 0
 
-%define flavor xanmod-edge
+%define flavor eva
 Name: kernel%{?flavor:-%{flavor}}
 Summary: The Linux Kernel with XanMod Patches
 
@@ -23,7 +23,7 @@ Summary: The Linux Kernel with XanMod Patches
 Version: %{_basekver}.%{_stablekver}
 
 %define customver 1
-%define flaver xm%{customver}
+%define flaver eva-%{customver}
 
 Release:%{flaver}.0%{?dist}
 
