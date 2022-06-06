@@ -1,0 +1,19 @@
+env:
+  CIRRUS_CLONE_DEPTH: "1"
+
+eva_task:
+  name: Eva build
+  timeout_in: 120m
+  container:
+    image: fedora:rawhide
+    cpu: 8
+    memory: 8G
+  setup_env_script:
+    - dnf group install rpm-development-tools -y
+  build_script:
+    - rpmbuild -v -bs eva-kernel.spec
+    - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
+  artifacts:
+    path: srpm_output/
+    when: always
+    expire_in: 1 week
