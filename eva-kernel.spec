@@ -116,7 +116,7 @@ unzip kernel.zip
 scripts/config --set-str BUILD_SALT "%{kverstr}"
 
 # Finalize the patched config
-make %{?_smp_mflags} EXTRAVERSION=-%{krelstr} oldconfig
+make %{?_smp_mflags} EXTRAVERSION=-%{krelstr} custom_defconfig
 
 %build
 make %{?_smp_mflags} EXTRAVERSION=-%{krelstr}
