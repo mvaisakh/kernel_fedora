@@ -447,3 +447,6 @@ fi
 
 %files
 %defattr (-, root, root)
+
+%changelog
+- Initial eva-kernel specs
