@@ -10,6 +10,7 @@ eva_task:
     memory: 8G
   setup_env_script:
     - dnf group install rpm-development-tools -y
+    - dnf install gcc -y
   build_script:
     - rpmbuild -v -bs eva-kernel.spec
     - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
