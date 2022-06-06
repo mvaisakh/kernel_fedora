@@ -110,7 +110,7 @@ Provides: kernel-devel-matched = %{rpmver}, kernel-devel-matched%{_isa} = %{rpmv
 This meta package is used to install matching core and devel packages for a given %{?flavor:%{flavor}} kernel.
 
 %prep
-unzip kernel.zip
+%setup -q -n linux-%{_basekver}
 
 # Set kernel version string as build salt
 scripts/config --set-str BUILD_SALT "%{kverstr}"
