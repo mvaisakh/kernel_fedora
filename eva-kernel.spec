@@ -35,7 +35,7 @@ License: GPLv2 and Redistributable, no modifications permitted
 Group: System Environment/Kernel
 Vendor: The Linux Community
 URL: https://github.com/mvaisakh/kernel_fedora
-Source0: https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-%{_basekver}.tar.xz
+Source0: https://github.com/mvaisakh/kernel_fedora/archive/refs/heads/kernel.zip
 Patch0: https://github.com/xanmod/linux/releases/download/%{version}-xanmod%{customver}/patch-%{version}-xanmod%{customver}.xz
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
@@ -113,7 +113,7 @@ Provides: kernel-devel-matched = %{rpmver}, kernel-devel-matched%{_isa} = %{rpmv
 This meta package is used to install matching core and devel packages for a given %{?flavor:%{flavor}} kernel.
 
 %prep
-%setup -q -n linux-%{_basekver}
+unzip kernel.zip
 
 # Set kernel version string as build salt
 scripts/config --set-str BUILD_SALT "%{kverstr}"
