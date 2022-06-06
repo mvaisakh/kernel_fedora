@@ -39,7 +39,6 @@ Source0: https://github.com/mvaisakh/kernel_fedora/archive/refs/heads/kernel.zip
 Patch0: https://github.com/xanmod/linux/releases/download/%{version}-xanmod%{customver}/patch-%{version}-xanmod%{customver}.xz
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
-Source2: rnread-%{name}
 BuildRequires: python3-devel make perl-generators perl-interpreter openssl-devel bison flex findutils git-core perl-devel openssl elfutils-devel gawk binutils m4 tar hostname bzip2 bash gzip xz bc diffutils redhat-rpm-config net-tools elfutils patch rpm-build dwarves kmod libkcapi-hmaccalc perl-Carp rsync grubby
 %if %{llvm_kbuild}
 BuildRequires: llvm%{_isa} lld%{_isa} clang%{_isa}
@@ -47,7 +46,6 @@ BuildRequires: llvm%{_isa} lld%{_isa} clang%{_isa}
 BuildRequires: gcc%{_isa}
 %endif
 Requires: %{name}-core-%{rpmver} = %{kverstr}, %{name}-modules-%{rpmver} = %{kverstr}
-Provides: rnread-%{name} = 2
 Provides: %{name}%{_basekver} = %{rpmver}
 
 %description
@@ -370,8 +368,6 @@ cp -v  %{buildroot}/boot/vmlinuz-%{kverstr} %{buildroot}/lib/modules/%{kverstr}/
 dd if=/dev/zero of=%{buildroot}/boot/initramfs-%{kverstr}.img bs=1M count=48
 
 mkdir -p %{buildroot}/%{_bindir}
-cp -v %{SOURCE2} %{buildroot}/%{_bindir}/rnread-%{name}
-chmod u+rwx,go+rx %{buildroot}/%{_bindir}/rnread-%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -451,4 +447,3 @@ fi
 
 %files
 %defattr (-, root, root)
-%attr(0755, root, root) %{_bindir}/rnread-%{name}
