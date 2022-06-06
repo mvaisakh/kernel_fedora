@@ -12,10 +12,10 @@ eva_task:
     - dnf group install rpm-development-tools -y
     - dnf install gcc zip unzip bc bison dwarves elfutils-devel flex git-core grubby hostname kmod libkcapi-hmaccalc m4 net-tools openssl openssl-devel perl-Carp perl-devel perl-generators perl-interpreter python3-devel rsync -y
   build_script:
-    - mkdir -p $HOME/rpmbuild/SOURCES srpm_output/
+    - mkdir -p $HOME/rpmbuild/SOURCES rpm_output/
     - rpmbuild -v -bb --without install eva-kernel.spec
-    - cp -av $HOME/rpmbuild/SRPMS/*.src.rpm srpm_output/
+    - cp -av $HOME/rpmbuild/SRPMS/*.rpm rpm_output/
   artifacts:
-    path: srpm_output/*
+    path: rpm_output/*
     when: always
     expire_in: 1 week
