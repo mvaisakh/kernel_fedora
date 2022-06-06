@@ -10,7 +10,7 @@ eva_task:
     memory: 8G
   setup_env_script:
     - dnf group install rpm-development-tools -y
-    - dnf install gcc zip unzip bc bison dwarves elfutils-devel flex git-core grubby hostname kmod libkcapi-hmaccalc m4 net-tools openssl openssl-devel perl-Carp perl-devel perl-generators perl-interpreter python3-devel rsync -y
+    - dnf install gcc zip unzip bc bison dwarves elfutils-devel flex git-core grubby hostname kmod m4 net-tools openssl openssl-devel perl-Carp perl-devel perl-generators perl-interpreter python3-devel rsync -y
   build_script:
     - mkdir -p $HOME/rpmbuild/SOURCES rpm_output/
     - rpmbuild -v -bb --without install eva-kernel.spec

@@ -38,7 +38,7 @@ URL: https://github.com/mvaisakh/kernel_fedora
 Source0: https://github.com/mvaisakh/kernel_fedora/archive/refs/heads/kernel.zip
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
-BuildRequires: python3-devel make perl-generators perl-interpreter openssl-devel bison flex findutils git-core perl-devel openssl elfutils-devel gawk binutils m4 tar hostname bzip2 bash gzip zip unzip bc diffutils redhat-rpm-config net-tools elfutils patch rpm-build dwarves kmod libkcapi-hmaccalc perl-Carp rsync grubby
+BuildRequires: python3-devel make perl-generators perl-interpreter openssl-devel bison flex findutils git-core perl-devel openssl elfutils-devel gawk binutils m4 tar hostname bzip2 bash gzip zip unzip bc diffutils redhat-rpm-config net-tools elfutils patch rpm-build dwarves kmod perl-Carp rsync grubby
 %if %{llvm_kbuild}
 BuildRequires: llvm%{_isa} lld%{_isa} clang%{_isa}
 %else
@@ -358,11 +358,6 @@ cp -v System.map %{buildroot}/lib/modules/%{kverstr}/System.map
 cp -v .config %{buildroot}/boot/config-%{kverstr}
 cp -v .config %{buildroot}/lib/modules/%{kverstr}/config
 
-(cd "%{buildroot}/boot/" && sha512hmac "vmlinuz-%{kverstr}" > ".vmlinuz-%{kverstr}.hmac")
-
-cp -v  %{buildroot}/boot/vmlinuz-%{kverstr} %{buildroot}/lib/modules/%{kverstr}/vmlinuz
-(cd "%{buildroot}/lib/modules/%{kverstr}" && sha512hmac vmlinuz > .vmlinuz.hmac)
-
 # create dummy initramfs image to inflate the disk space requirement for the initramfs. 48M seems to be the right size nowadays with more and more hardware requiring initramfs-located firmware to work properly (for reference, Fedora has it set to 20M)
 dd if=/dev/zero of=%{buildroot}/boot/initramfs-%{kverstr}.img bs=1M count=48
 
@@ -412,10 +407,8 @@ fi
 %ghost %attr(0600, root, root) /boot/initramfs-%{kverstr}.img
 %ghost %attr(0600, root, root) /boot/symvers-%{kverstr}.gz
 %ghost %attr(0644, root, root) /boot/config-%{kverstr}
-/boot/.vmlinuz-%{kverstr}.hmac
 %dir /lib/modules/%{kverstr}/
 %dir /lib/modules/%{kverstr}/kernel/
-/lib/modules/%{kverstr}/.vmlinuz.hmac
 /lib/modules/%{kverstr}/config
 /lib/modules/%{kverstr}/vmlinuz
 /lib/modules/%{kverstr}/System.map
@@ -424,7 +417,6 @@ fi
 %files modules
 %defattr (-, root, root)
 /lib/modules/%{kverstr}/*
-%exclude /lib/modules/%{kverstr}/.vmlinuz.hmac
 %exclude /lib/modules/%{kverstr}/config
 %exclude /lib/modules/%{kverstr}/vmlinuz
 %exclude /lib/modules/%{kverstr}/System.map
