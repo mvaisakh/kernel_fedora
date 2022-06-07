@@ -410,7 +410,6 @@ fi
 %dir /lib/modules/%{kverstr}/
 %dir /lib/modules/%{kverstr}-eva/kernel/
 /lib/modules/%{kverstr}/config
-/lib/modules/%{kverstr}-eva/vmlinuz
 /lib/modules/%{kverstr}/System.map
 /lib/modules/%{kverstr}/symvers.gz
 
