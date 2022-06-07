@@ -19,7 +19,7 @@ Name: kernel%{?flavor:-%{flavor}}
 Summary: The Linux Kernel with mvaisakh's modifications
 
 %define _basekver 5.18
-%define _stablekver 1
+%define _stablekver 2
 Version: %{_basekver}.%{_stablekver}
 
 Release:%{flavor}.0%{?dist}
