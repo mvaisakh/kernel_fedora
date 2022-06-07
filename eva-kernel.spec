@@ -408,7 +408,9 @@ fi
 %ghost %attr(0600, root, root) /boot/symvers-%{kverstr}.gz
 %ghost %attr(0644, root, root) /boot/config-%{kverstr}
 %dir /lib/modules/%{kverstr}/
+%dir /lib/modules/%{kverstr}/kernel/
 /lib/modules/%{kverstr}/config
+/lib/modules/%{kverstr}/vmlinuz
 /lib/modules/%{kverstr}/System.map
 /lib/modules/%{kverstr}/symvers.gz
 
