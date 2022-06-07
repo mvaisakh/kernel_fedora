@@ -22,10 +22,7 @@ Summary: The Linux Kernel with mvaisakh's modifications
 %define _stablekver 1
 Version: %{_basekver}.%{_stablekver}
 
-%define customver 1
-%define flaver eva.%{customver}
-
-Release:%{flaver}.0%{?dist}
+Release:%{flavor}.0%{?dist}
 
 %define rpmver %{version}-%{release}
 %define krelstr %{release}.%{_arch}
@@ -48,7 +45,7 @@ Requires: %{name}-core-%{rpmver} = %{kverstr}, %{name}-modules-%{rpmver} = %{kve
 Provides: %{name}%{_basekver} = %{rpmver}
 
 %description
-The kernel-%{flaver} meta package
+The kernel-%{flavor} meta package
 
 %package core
 Summary: Kernel core package
@@ -408,7 +405,7 @@ fi
 %ghost %attr(0600, root, root) /boot/symvers-%{kverstr}.gz
 %ghost %attr(0644, root, root) /boot/config-%{kverstr}
 %dir /lib/modules/%{kverstr}/
-%dir /lib/modules/%{kverstr}-eva/kernel/
+%dir /lib/modules/%{kverstr}/kernel/
 /lib/modules/%{kverstr}/config
 /lib/modules/%{kverstr}/System.map
 /lib/modules/%{kverstr}/symvers.gz
